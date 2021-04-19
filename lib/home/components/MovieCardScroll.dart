@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/components/MovieCard.dart';
 import 'package:movie_flutter/models/movieModels.dart';
+
+import 'MovieCard.dart';
 
 class MovieCardScroll extends StatelessWidget {
   const MovieCardScroll({

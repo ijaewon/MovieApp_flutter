@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../sizeConfig.dart';
+import '../../sizeConfig.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard(

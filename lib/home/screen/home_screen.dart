@@ -1,19 +1,26 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/components/CategoryTitle.dart';
-import 'package:movie_flutter/components/MainPost.dart';
-import 'package:movie_flutter/components/MovieCardScroll.dart';
+import 'package:movie_flutter/components/MyNavBar.dart';
+import 'package:movie_flutter/home/components/CategoryTitle.dart';
+import 'package:movie_flutter/home/components/MainPost.dart';
+import 'package:movie_flutter/home/components/MovieCardScroll.dart';
 import 'package:movie_flutter/models/movieModels.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double defaultSize = SizeConfig.defaultSize;
 
     return Scaffold(
+      bottomNavigationBar: CustomNavBar(),
       appBar: buildAppBar(defaultSize, title: "Home"),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../sizeConfig.dart';
+import '../../sizeConfig.dart';
 
 class MainPost extends StatelessWidget {
   const MainPost({

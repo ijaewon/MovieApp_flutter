@@ -5,7 +5,7 @@ class SearchScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomNavBar(),
+      // bottomNavigationBar: CustomNavBar(),
       body: Text(
         "Search",
         style: TextStyle(color: Colors.white),

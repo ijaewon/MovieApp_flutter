@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/components/MyNavBar.dart';
 import 'package:movie_flutter/home/components/CategoryTitle.dart';
 import 'package:movie_flutter/home/components/MainPost.dart';
 import 'package:movie_flutter/home/components/MovieCardScroll.dart';
@@ -20,7 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double defaultSize = SizeConfig.defaultSize;
 
     return Scaffold(
-      bottomNavigationBar: CustomNavBar(),
+      // bottomNavigationBar: CustomNavBar(),
       appBar: buildAppBar(defaultSize, title: "Home"),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,

@@ -5,7 +5,7 @@ class UpCommingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: CustomNavBar(),
+      // bottomNavigationBar: CustomNavBar(),
       body: Text("upComming"),
     );
   }

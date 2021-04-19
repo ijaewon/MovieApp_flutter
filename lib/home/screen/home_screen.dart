@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/components/MovieCard.dart';
+import 'package:movie_flutter/models/movieModels.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,38 +13,9 @@ class HomeScreen extends StatelessWidget {
       appBar: buildAppBar(defaultSize),
       body: Padding(
         padding: EdgeInsets.all(defaultSize * 2),
-        child: Container(
-          width: defaultSize * 17,
-          height: defaultSize * 27,
-          color: Colors.black,
-          child: Padding(
-            padding: EdgeInsets.all(defaultSize),
-            child: Column(
-              children: [
-                Container(
-                  width: defaultSize * 15,
-                  height: defaultSize * 20,
-                  color: Colors.blue,
-                ),
-                SizedBox(
-                    width: defaultSize * 15,
-                    child: Text(
-                      "Iron man",
-                      style: TextStyle(
-                          color: Colors.white, fontSize: defaultSize * 1.6),
-                      textAlign: TextAlign.center,
-                    )),
-                SizedBox(
-                    width: defaultSize * 15,
-                    child: Text(
-                      "Iron man",
-                      style: TextStyle(
-                          color: Colors.white, fontSize: defaultSize * 1.6),
-                      textAlign: TextAlign.center,
-                    )),
-              ],
-            ),
-          ),
+        child: MovieCard(
+          movieImage: moive[0]['img'],
+          movieTitle: moive[0]['title'],
         ),
       ),
     );

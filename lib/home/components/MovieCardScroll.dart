@@ -24,6 +24,7 @@ class MovieCardScroll extends StatelessWidget {
                 return MovieCard(
                   movieImage: movies[index]['img'],
                   movieTitle: movies[index]['title'],
+                  press: () => print("Movie Card"),
                 );
               })),
         ),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/CategoryTitle.dart';
 import 'package:movie_flutter/home/components/MainPost.dart';
-import 'package:movie_flutter/home/components/MovieCardScroll.dart';
+import 'package:movie_flutter/home/components/MovieCard.dart';
 import 'package:movie_flutter/models/movieModels.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
@@ -15,14 +15,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final String _query = """
-    query users {
-    users {
-      id
-      name
-      rocket
-      twitter
+    query Movies(\$limit: Int!, \$rating: Float!){
+      movies(limit: \$limit, rating: \$rating){
+        title
+        rating
+        medium_cover_image
+        summary
+      }
     }
-  }
   """;
 
   @override
@@ -31,7 +31,11 @@ class _HomeScreenState extends State<HomeScreen> {
     double defaultSize = SizeConfig.defaultSize;
 
     return Query(
-        options: QueryOptions(document: gql(_query)),
+        options: QueryOptions(
+          document: gql(_query),
+          variables: {'limit': 3, 'rating': 8.0},
+          // pollInterval: Duration(seconds: 10),
+        ),
         builder: (
           QueryResult result, {
           VoidCallback refetch,
@@ -44,8 +48,15 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             );
           }
-          // final _movies = result.data["movies"];
-          final _movies = result.data["users"];
+          if (result.hasException) {
+            return Center(
+              child: Text(
+                result.exception.toString(),
+                style: TextStyle(color: Colors.white),
+              ),
+            );
+          }
+          final _movies = result.data["movies"];
           if (_movies == null || _movies.isEmpty) {
             return Container(
               child: Center(
@@ -62,26 +73,56 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     MainPost(
                       image: movies[0]['medium_cover_image'],
-                      title: _movies[0]['name'],
-                      description: movies[0]['summary'],
-                      rating: movies[0]['rating'],
+                      title: _movies[0]['title'],
+                      description: _movies[0]['summary'],
+                      rating: _movies[0]['rating'].toString(),
                     ),
                     CategoryTitle(
                       title: "Popular Movies",
                     ),
-                    MovieCardScroll(
-                      image: movies[0]['medium_cover_image'],
-                      title: _movies[0]['name'],
-                      length: movies.length,
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: defaultSize * 2, top: defaultSize * 2.3),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: List.generate(_movies.length, (index) {
+                                return MovieCard(
+                                  movieImage: _movies[index]
+                                      ['medium_cover_image'],
+                                  movieTitle: _movies[index]['title'],
+                                  rating: _movies[0]['rating'].toString(),
+                                  press: () => print("Movie Card"),
+                                );
+                              })),
+                        ),
+                      ),
                     ),
                     CategoryTitle(
                       title: "Top Rated",
                     ),
-                    MovieCardScroll(
-                      image: movies[0]['medium_cover_image'],
-                      title: _movies[0]['name'],
-                      length: movies.length,
-                    )
+                    Padding(
+                      padding: EdgeInsets.only(
+                          left: defaultSize * 2, top: defaultSize * 2.3),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: SizedBox(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: List.generate(_movies.length, (index) {
+                                return MovieCard(
+                                  movieImage: _movies[index]
+                                      ['medium_cover_image'],
+                                  movieTitle: _movies[index]['title'],
+                                  rating: _movies[0]['rating'].toString(),
+                                  press: () => print("Movie Card"),
+                                );
+                              })),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

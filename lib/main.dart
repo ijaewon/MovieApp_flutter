@@ -6,7 +6,7 @@ import 'components/MyNavBar.dart';
 void main() async {
   await initHiveForFlutter();
 
-  final HttpLink httpLink = HttpLink("https://api.spacex.land/graphql/");
+  final HttpLink httpLink = HttpLink("http://localhost:4000/");
 
   ValueNotifier<GraphQLClient> client = ValueNotifier(
       GraphQLClient(link: httpLink, cache: GraphQLCache(store: HiveStore())));

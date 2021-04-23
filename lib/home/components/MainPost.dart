@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class MainPost extends StatelessWidget {
   final String image;
   final String title;
   final String description;
-  final double rating;
+  final String rating;
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +49,9 @@ class MainPost extends StatelessWidget {
               Container(
                 width: defaultSize * 13.3,
                 height: defaultSize * 17.5,
-                child: Image(image: AssetImage(image)),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage(image), fit: BoxFit.cover)),
               ),
               SizedBox(
                 width: defaultSize * 5,
@@ -58,20 +61,21 @@ class MainPost extends StatelessWidget {
                 child: Column(
                   children: [
                     RichText(
+                        overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
-                      TextSpan(
-                          text: title,
-                          style: TextStyle(
-                              fontSize: defaultSize * 2.5,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white)),
-                    ])),
+                          TextSpan(
+                              text: title,
+                              style: TextStyle(
+                                  fontSize: defaultSize * 2.5,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                        ])),
                     SizedBox(
                       height: defaultSize,
                     ),
                     RichText(
                         text: TextSpan(children: [
-                      TextSpan(text: "Rating"),
+                      TextSpan(text: rating),
                     ])),
                     SizedBox(
                       height: defaultSize,

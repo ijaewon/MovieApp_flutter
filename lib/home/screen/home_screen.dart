@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/CategoryTitle.dart';
 import 'package:movie_flutter/home/components/MainPost.dart';
 import 'package:movie_flutter/home/components/MovieCardScroll.dart';
@@ -13,40 +14,84 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final String _query = """
+    query users {
+    users {
+      id
+      name
+      rocket
+      twitter
+    }
+  }
+  """;
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double defaultSize = SizeConfig.defaultSize;
 
-    return Scaffold(
-      // bottomNavigationBar: CustomNavBar(),
-      appBar: buildAppBar(defaultSize, title: "Home"),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
-          children: [
-            MainPost(
-              image: movies[0]['img'],
-              title: movies[0]['title'],
-              description: movies[0]['description'],
-              rating: movies[0]['rating'],
-            ),
-            CategoryTitle(
-              title: "Popular Movies",
-            ),
-            MovieCardScroll(defaultSize: defaultSize),
-            CategoryTitle(
-              title: "Top Rated",
-            ),
-            MovieCardScroll(defaultSize: defaultSize)
-          ],
-        ),
-      ),
-    );
+    return Query(
+        options: QueryOptions(document: gql(_query)),
+        builder: (
+          QueryResult result, {
+          VoidCallback refetch,
+          FetchMore fetchMore,
+        }) {
+          if (result.isLoading) {
+            return Container(
+              child: Center(
+                child: Text("Loading"),
+              ),
+            );
+          }
+          // final _movies = result.data["movies"];
+          final _movies = result.data["users"];
+          if (_movies == null || _movies.isEmpty) {
+            return Container(
+              child: Center(
+                child: Text("No movies"),
+              ),
+            );
+          } else {
+            return Scaffold(
+              // bottomNavigationBar: CustomNavBar(),
+              appBar: buildAppBar(defaultSize, title: "Home"),
+              body: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Column(
+                  children: [
+                    MainPost(
+                      image: movies[0]['medium_cover_image'],
+                      title: _movies[0]['name'],
+                      description: movies[0]['summary'],
+                      rating: movies[0]['rating'],
+                    ),
+                    CategoryTitle(
+                      title: "Popular Movies",
+                    ),
+                    MovieCardScroll(
+                      image: movies[0]['medium_cover_image'],
+                      title: _movies[0]['name'],
+                      length: movies.length,
+                    ),
+                    CategoryTitle(
+                      title: "Top Rated",
+                    ),
+                    MovieCardScroll(
+                      image: movies[0]['medium_cover_image'],
+                      title: _movies[0]['name'],
+                      length: movies.length,
+                    )
+                  ],
+                ),
+              ),
+            );
+          }
+        });
   }
 
-  AppBar buildAppBar(double defaultSize, {String title}) {
-    return AppBar(
+  buildAppBar(double defaultSize, {String title}) {
+    AppBar(
       title: Text(
         title,
         style: TextStyle(

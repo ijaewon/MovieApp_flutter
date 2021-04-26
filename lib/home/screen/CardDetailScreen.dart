@@ -30,55 +30,58 @@ class CardScreen extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            BuildCardAppBar(defaultSize: defaultSize, title: title),
-            _buildMainPost(defaultSize),
-            CardDetailTitle(
-              defaultSize: defaultSize,
-              title: "Summary",
-            ),
-            SizedBox(
-              height: defaultSize,
-            ),
-            Container(
-              width: defaultSize * 38,
-              child: RichText(
-                  text: TextSpan(children: [
-                TextSpan(
-                    text: summary,
-                    style: TextStyle(
-                        color: Colors.white, fontSize: defaultSize * 1.3))
-              ])),
-            ),
-            SizedBox(
-              height: defaultSize * 2,
-            ),
-            CardDetailTitle(defaultSize: defaultSize, title: "Langauge"),
-            SizedBox(
-              height: defaultSize,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: defaultSize * 36),
-              child: Text(
-                languages,
-                style:
-                    TextStyle(color: Colors.white, fontSize: defaultSize * 1.3),
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              BuildCardAppBar(defaultSize: defaultSize, title: title),
+              _buildMainPost(defaultSize),
+              CardDetailTitle(
+                defaultSize: defaultSize,
+                title: "Summary",
               ),
-            ),
-            CardDetailTitle(defaultSize: defaultSize, title: "Runtime"),
-            SizedBox(
-              height: defaultSize,
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: defaultSize * 35),
-              child: Text(
-                runtime,
-                style:
-                    TextStyle(color: Colors.white, fontSize: defaultSize * 1.3),
+              SizedBox(
+                height: defaultSize,
               ),
-            ),
-          ],
+              Container(
+                width: defaultSize * 38,
+                child: RichText(
+                    text: TextSpan(children: [
+                  TextSpan(
+                      text: summary,
+                      style: TextStyle(
+                          color: Colors.white, fontSize: defaultSize * 1.3))
+                ])),
+              ),
+              SizedBox(
+                height: defaultSize * 2,
+              ),
+              CardDetailTitle(defaultSize: defaultSize, title: "Langauge"),
+              SizedBox(
+                height: defaultSize,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: defaultSize * 36),
+                child: Text(
+                  languages,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: defaultSize * 1.3),
+                ),
+              ),
+              CardDetailTitle(defaultSize: defaultSize, title: "Runtime"),
+              SizedBox(
+                height: defaultSize,
+              ),
+              Padding(
+                padding: EdgeInsets.only(right: defaultSize * 35),
+                child: Text(
+                  runtime,
+                  style: TextStyle(
+                      color: Colors.white, fontSize: defaultSize * 1.3),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

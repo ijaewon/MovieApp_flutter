@@ -8,8 +8,10 @@ class QueryMainPost extends StatelessWidget {
       movies(limit: \$limit, rating: \$rating){
         title
         rating
-        medium_cover_image
         summary
+        medium_cover_image
+        language
+        runtime
       }
     }
   """;
@@ -51,8 +53,10 @@ class QueryMainPost extends StatelessWidget {
             return MainPost(
               image: _movies[0]['medium_cover_image'],
               title: _movies[0]['title'],
-              description: _movies[0]['summary'],
+              summary: _movies[0]['summary'],
               rating: _movies[0]['rating'].toString(),
+              language: _movies[0]['language'],
+              runtime: _movies[0]['runtime'].toString(),
             );
           }
         });

@@ -1,21 +1,26 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/home/screen/CardDetailScreen.dart';
 
 import '../../sizeConfig.dart';
 
 class MainPost extends StatelessWidget {
-  const MainPost({
-    Key key,
-    @required this.image,
-    @required this.title,
-    @required this.description,
-    @required this.rating,
-  }) : super(key: key);
+  const MainPost(
+      {Key key,
+      @required this.image,
+      @required this.title,
+      @required this.summary,
+      @required this.rating,
+      @required this.language,
+      @required this.runtime})
+      : super(key: key);
 
   final String image;
   final String title;
-  final String description;
+  final String summary;
   final String rating;
+  final String language;
+  final String runtime;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +92,7 @@ class MainPost extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         text: TextSpan(children: [
                           TextSpan(
-                              text: description,
+                              text: summary,
                               style: TextStyle(color: Colors.white)),
                         ])),
                     SizedBox(
@@ -99,7 +104,17 @@ class MainPost extends StatelessWidget {
                       child: ElevatedButton(
                         child: Text('View detail'),
                         onPressed: () {
-                          print('View detail');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CardScreen(
+                                        image: image,
+                                        title: title,
+                                        rating: rating,
+                                        summary: summary,
+                                        languages: language,
+                                        runtime: runtime,
+                                      )));
                         },
                         style: ButtonStyle(
                           backgroundColor:

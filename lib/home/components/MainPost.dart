@@ -25,17 +25,18 @@ class MainPost extends StatelessWidget {
     double defaultSize = SizeConfig.defaultSize;
     return Stack(
       children: [
+        Image.network(
+          image,
+          fit: BoxFit.cover,
+          width: SizeConfig.screenWidth,
+          height: defaultSize * 30,
+          alignment: Alignment.lerp(Alignment.topLeft, Alignment.center, 1),
+        ),
         Container(
           width: SizeConfig.screenWidth,
           height: defaultSize * 30,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(image),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.lerp(
-                      Alignment.topLeft, Alignment.center, 0.3))),
           child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: Container(
               color: Colors.transparent,
             ),
@@ -49,9 +50,10 @@ class MainPost extends StatelessWidget {
               Container(
                 width: defaultSize * 13.3,
                 height: defaultSize * 17.5,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage(image), fit: BoxFit.cover)),
+                child: Image.network(
+                  image,
+                  fit: BoxFit.cover,
+                ),
               ),
               SizedBox(
                 width: defaultSize * 5,
@@ -68,14 +70,16 @@ class MainPost extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: defaultSize * 2.5,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white)),
+                                  color: Colors.black54)),
                         ])),
                     SizedBox(
                       height: defaultSize,
                     ),
                     RichText(
                         text: TextSpan(children: [
-                      TextSpan(text: rating),
+                      TextSpan(
+                          text: rating,
+                          style: TextStyle(color: Colors.black54)),
                     ])),
                     SizedBox(
                       height: defaultSize,
@@ -87,7 +91,7 @@ class MainPost extends StatelessWidget {
                         text: TextSpan(children: [
                           TextSpan(
                               text: description,
-                              style: TextStyle(color: Colors.white)),
+                              style: TextStyle(color: Colors.black54)),
                         ])),
                     SizedBox(
                       height: defaultSize,

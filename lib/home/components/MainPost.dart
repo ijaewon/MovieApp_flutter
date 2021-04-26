@@ -1,6 +1,4 @@
-import 'dart:ffi';
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 import '../../sizeConfig.dart';
@@ -70,7 +68,7 @@ class MainPost extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: defaultSize * 2.5,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black54)),
+                                  color: Colors.white)),
                         ])),
                     SizedBox(
                       height: defaultSize,
@@ -78,8 +76,7 @@ class MainPost extends StatelessWidget {
                     RichText(
                         text: TextSpan(children: [
                       TextSpan(
-                          text: rating,
-                          style: TextStyle(color: Colors.black54)),
+                          text: rating, style: TextStyle(color: Colors.white)),
                     ])),
                     SizedBox(
                       height: defaultSize,
@@ -91,7 +88,7 @@ class MainPost extends StatelessWidget {
                         text: TextSpan(children: [
                           TextSpan(
                               text: description,
-                              style: TextStyle(color: Colors.black54)),
+                              style: TextStyle(color: Colors.white)),
                         ])),
                     SizedBox(
                       height: defaultSize,

@@ -1,14 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/CategoryTitle.dart';
-import 'package:movie_flutter/home/components/MainPost.dart';
-import 'package:movie_flutter/home/components/MovieCard.dart';
-import 'package:movie_flutter/home/graphql/PopularMovie.dart';
+import 'package:movie_flutter/home/graphql/SuggestionMovie.dart';
 import 'package:movie_flutter/home/graphql/QueryMainPost.dart';
 import 'package:movie_flutter/home/graphql/TopRated.dart';
-import 'package:movie_flutter/models/movieModels.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -31,13 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             QueryMainPost(),
             CategoryTitle(
-              title: "Popular Movies",
-            ),
-            PopularMovie(),
-            CategoryTitle(
               title: "Top Rated",
             ),
-            TopRatedMovie()
+            TopRatedMovie(),
+            CategoryTitle(
+              title: "Suggestion Movies",
+            ),
+            SuggestionMovies(),
           ],
         ),
       ),

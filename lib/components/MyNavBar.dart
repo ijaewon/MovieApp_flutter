@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/home/screen/UpComming_screen.dart';
-import 'package:movie_flutter/home/screen/home_screen.dart';
-import 'package:movie_flutter/home/screen/search_screen.dart';
+import 'package:movie_flutter/home/screen/HomeScreen.dart';
+import 'package:movie_flutter/home/screen/SearchScreen.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
 class HomeTabBar extends StatefulWidget {

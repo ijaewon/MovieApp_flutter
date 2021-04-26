@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/MovieCard.dart';
+import 'package:movie_flutter/home/screen/CardDetailScreen.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
-class PopularMovie extends StatelessWidget {
+class SuggestionMovies extends StatelessWidget {
   final String _query = """
-    query Movies(\$limit: Int!, \$rating: Float!){
-      movies(limit: \$limit, rating: \$rating){
+    query Suggestions(\$id: Int!){
+      suggestions(id: \$id) {
         title
         rating
         medium_cover_image
         summary
+        runtime
+        language
       }
     }
   """;
@@ -21,7 +24,9 @@ class PopularMovie extends StatelessWidget {
     return Query(
         options: QueryOptions(
           document: gql(_query),
-          variables: {'limit': 3, 'rating': 7.0},
+          variables: {
+            'id': 0,
+          },
         ),
         builder: (
           QueryResult result, {
@@ -43,7 +48,7 @@ class PopularMovie extends StatelessWidget {
               ),
             );
           }
-          final _movies = result.data["movies"];
+          final _movies = result.data["suggestions"];
           if (_movies == null || _movies.isEmpty) {
             return Container(
               child: Center(
@@ -64,7 +69,22 @@ class PopularMovie extends StatelessWidget {
                           movieImage: _movies[index]['medium_cover_image'],
                           movieTitle: _movies[index]['title'],
                           rating: _movies[index]['rating'].toString(),
-                          press: () => print("Movie Card"),
+                          press: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CardScreen(
+                                          image: _movies[index]
+                                              ['medium_cover_image'],
+                                          title: _movies[index]['title'],
+                                          rating: _movies[index]['rating']
+                                              .toString(),
+                                          languages: _movies[index]['language'],
+                                          runtime: _movies[index]['runtime']
+                                              .toString(),
+                                          summary: _movies[index]['summary'],
+                                        )));
+                          },
                         );
                       })),
                 ),

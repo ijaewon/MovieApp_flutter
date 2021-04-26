@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/MovieCard.dart';
+import 'package:movie_flutter/home/screen/CardDetailScreen.dart';
 import 'package:movie_flutter/sizeConfig.dart';
 
 class TopRatedMovie extends StatelessWidget {
@@ -9,8 +10,10 @@ class TopRatedMovie extends StatelessWidget {
       movies(limit: \$limit, rating: \$rating){
         title
         rating
-        medium_cover_image
         summary
+        medium_cover_image
+        language
+        runtime
       }
     }
   """;
@@ -21,7 +24,7 @@ class TopRatedMovie extends StatelessWidget {
     return Query(
         options: QueryOptions(
           document: gql(_query),
-          variables: {'limit': 3, 'rating': 9.0},
+          variables: {'limit': 10, 'rating': 9.0},
         ),
         builder: (
           QueryResult result, {
@@ -64,7 +67,22 @@ class TopRatedMovie extends StatelessWidget {
                           movieImage: _movies[index]['medium_cover_image'],
                           movieTitle: _movies[index]['title'],
                           rating: _movies[index]['rating'].toString(),
-                          press: () => print("Movie Card"),
+                          press: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CardScreen(
+                                          image: _movies[index]
+                                              ['medium_cover_image'],
+                                          title: _movies[index]['title'],
+                                          rating: _movies[index]['rating']
+                                              .toString(),
+                                          languages: _movies[index]['language'],
+                                          runtime: _movies[index]['runtime']
+                                              .toString(),
+                                          summary: _movies[index]['summary'],
+                                        )));
+                          },
                         );
                       })),
                 ),

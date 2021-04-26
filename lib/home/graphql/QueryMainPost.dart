@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:movie_flutter/home/components/MainPost.dart';
-import 'package:movie_flutter/sizeConfig.dart';
 
 class QueryMainPost extends StatelessWidget {
   final String _query = """
@@ -16,12 +15,10 @@ class QueryMainPost extends StatelessWidget {
   """;
   @override
   Widget build(BuildContext context) {
-    SizeConfig().init(context);
-    double defaultSize = SizeConfig.defaultSize;
     return Query(
         options: QueryOptions(
           document: gql(_query),
-          variables: {'limit': 3, 'rating': 7.0},
+          variables: {'limit': 10, 'rating': 9.5},
         ),
         builder: (
           QueryResult result, {
@@ -56,7 +53,6 @@ class QueryMainPost extends StatelessWidget {
               title: _movies[0]['title'],
               description: _movies[0]['summary'],
               rating: _movies[0]['rating'].toString(),
-              // rating 다 똑같이 되는거 고치기
             );
           }
         });

@@ -51,12 +51,12 @@ class QueryMainPost extends StatelessWidget {
             );
           } else {
             return MainPost(
-              image: _movies[0]['medium_cover_image'],
-              title: _movies[0]['title'],
-              summary: _movies[0]['summary'],
-              rating: _movies[0]['rating'].toString(),
-              language: _movies[0]['language'],
-              runtime: _movies[0]['runtime'].toString(),
+              image: _movies[5]['medium_cover_image'],
+              title: _movies[5]['title'],
+              summary: _movies[5]['summary'],
+              rating: _movies[5]['rating'].toString(),
+              language: _movies[5]['language'],
+              runtime: _movies[5]['runtime'].toString(),
             );
           }
         });

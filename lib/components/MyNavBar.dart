@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_flutter/home/screen/UpComming_screen.dart';
+import 'package:movie_flutter/home/screen/SavedMovies.dart';
 import 'package:movie_flutter/home/screen/HomeScreen.dart';
 import 'package:movie_flutter/home/screen/SearchScreen.dart';
 import 'package:movie_flutter/sizeConfig.dart';
@@ -33,7 +33,7 @@ class _HomeTabBarState extends State<HomeTabBar>
       body: TabBarView(
           controller: controller, // 컨트롤러 연결
           physics: NeverScrollableScrollPhysics(),
-          children: [HomeScreen(), UpCommingScreen(), SearchScreen()]),
+          children: [HomeScreen(), SearchScreen(), SavedMoive()]),
       bottomNavigationBar: Container(
         height: defaultSize * 10,
         child: TabBar(controller: controller, // 컨트롤러 연결
@@ -46,13 +46,13 @@ class _HomeTabBarState extends State<HomeTabBar>
               ),
               Tab(
                 icon: Icon(
-                  Icons.update,
+                  Icons.search,
                   size: defaultSize * 3,
                 ),
               ),
               Tab(
                 icon: Icon(
-                  Icons.search,
+                  Icons.bookmark_border,
                   size: defaultSize * 3,
                 ),
               )

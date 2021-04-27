@@ -2,6 +2,7 @@ import 'dart:ffi';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:movie_flutter/home/components/CardDetailAppBar.dart';
 
 import '../../sizeConfig.dart';
 
@@ -34,7 +35,7 @@ class CardScreen extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              BuildCardAppBar(defaultSize: defaultSize, title: title),
+              CardDetailAppBar(defaultSize: defaultSize, title: title),
               _buildMainPost(defaultSize),
               CardDetailTitle(
                 defaultSize: defaultSize,
@@ -179,48 +180,6 @@ class CardDetailTitle extends StatelessWidget {
             fontSize: defaultSize * 1.7,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class BuildCardAppBar extends StatelessWidget {
-  const BuildCardAppBar({
-    Key key,
-    @required this.defaultSize,
-    @required this.title,
-  }) : super(key: key);
-
-  final double defaultSize;
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: defaultSize),
-      child: Row(
-        children: [
-          IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          SizedBox(width: defaultSize * 2),
-          Container(
-            width: defaultSize * 29,
-            child: Text(
-              title,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: defaultSize * 2,
-                  fontWeight: FontWeight.bold),
-            ),
-          )
-        ],
       ),
     );
   }
